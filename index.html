@@ -7,8 +7,8 @@
 	<body>
 		<div>
 			<!--video feed-->
-			<video id="video" width="480" height="640" autoplay></video>
-			<canvas id="canvas" width="480" height="640"></canvas>
+			<video id="video" width="360" height="640" autoplay></video>
+			<canvas id="canvas" width="360" height="640"></canvas>
 			
 			<br>
 			
@@ -62,8 +62,7 @@
 						if (video.paused) video.play();
 						else video.pause();
 						
-						context.drawImage(video, 0, 0);
-						
+						//context.drawImage(video, 0, 0);
 					});
 				}, false);
 				
