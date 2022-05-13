@@ -29,8 +29,8 @@
             			console.log('An error has occurred', e);
             		};
 
-			//videoPlayer();
-					if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			videoPlayer();
+					/*if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 						
                 				navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
 			
@@ -68,9 +68,7 @@
 						else document.getElementById('snap').value = "screenshot";
 						//context.drawImage(video, 0, 0);
 						}
-					);
-
-					}, false);
+					);*/
 			
 			function videoPlayer() {
 				        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -101,6 +99,8 @@
 					}
 			}
 				
+			}, false);
+			
 			</script>
 		</div>
 	</body>
