@@ -17,40 +17,47 @@
 
 			<script type="text/javascript">
 				
-				var video = document.getElementById ('video');
+			window.addEventListener("DOMContentLoaded", function() {
 
-				var canvas = document.getElementById ('canvas');				
-				var context = canvas.getContext('2d');
+            		var canvas = document.getElementById('canvas');
+            		var context = canvas.getContext('2d');
+            		var video = document.getElementById('video');
+            		var mediaConfig =  { video: true };
+            		var errBack = function(e) {
+            			console.log('An error has occurred', e)
+            		};
 
-				navigator.getUserMedia = 
-							navigator.getUserMedia ||
-							navigator.webkitGetUserMedia ||
-							navigator.mozGetUserMedia ||
-							navigator.oGetUserMedia ||
-							navigator.msGetUserMedia;
+           		 		if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                				navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+			
+							video.srcObject = stream;
+                    					video.play();
+               		 			});
+            				}
 
-				if (navigator.getUserMedia) {
+            				else if(navigator.getUserMedia) {
+						navigator.getUserMedia(mediaConfig, function(stream) {
+							video.src = stream;
+							video.play();
+						}, errBack);
+					} else if(navigator.webkitGetUserMedia) {
+						navigator.webkitGetUserMedia(mediaConfig, function(stream){
+							video.src = window.webkitURL.createObjectURL(stream);
+							video.play();
+						}, errBack);
+					} else if(navigator.mozGetUserMedia) {
+						navigator.mozGetUserMedia(mediaConfig, function(stream){
+							video.src = window.URL.createObjectURL(stream);
+							video.play();
+						}, errBack);
+					}
+
+					//Trigger photo take
+					document.getElementById('snap').addEventListener('click', function() {
+						context.drawImage(video, 0, 0, 640, 480);
+					});
+				}, false);
 				
-					navigator.getUserMedia ({video:true}, streamWebCam, throwError);
-				}
-
-				function streamWebCam (stream) {
-
-					video.src = window.URL.createObjectURL (stream);
-				}
-
-				function throwError (e)	{
-
-					alert(e.name);
-				}
-
-				function snap () {
-				
-					canvas.width = video.clientWidth;
-					canvas.height = video.clientHeight;
-					canvas.drawImage (video, 0, 0);
-				}
-
 			</script>
 		</div>
 	</body>
