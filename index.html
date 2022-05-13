@@ -13,16 +13,16 @@
 			<br>
 			
 			<!--captures the camera photo-->
-			<button id="snap">screenshot</button>
+			<button id="snap">capture</button>
 
 			<script type="text/javascript">
 				
-			window.addEventListener("DOMContentLoaded", function() {
+			window.addEventListener ("DOMContentLoaded", function () {
 
-            		var canvas = document.getElementById('canvas');
+            		var canvas = document.getElementById ('canvas');
             		var context = canvas.getContext('2d');
 			
-            		var video = document.getElementById('video');
+            		var video = document.getElementById ('video');
             		var mediaConfig =  {video: {facingMode: 'environment'}};
 
             		var errBack = function(e) {
@@ -30,21 +30,23 @@
             		};
 
 			videoPlayer();
-					document.getElementById('snap').addEventListener ('click', function() {
+					document.getElementById ('snap').addEventListener ('click', function () {
 						video.paused = !video.paused;
 						
 						if (video.paused) video.play();
 						else video.pause();
 						
-						if (document.getElementById('snap').innerText === "screenshot") document.getElementById('snap').innerText = "redo";
-						else document.getElementById('snap').innerText = "shot";
+						if (document.getElementById ('snap').innerText === "capture") document.getElementById('snap').innerText = "redo";
+						else document.getElementById ('snap').innerText = "capture";
 						//context.drawImage(video, 0, 0);
 						}
 					);
 			
 			function videoPlayer() {
+				
 				        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                				navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+						
+                				navigator.mediaDevices.getUserMedia (mediaConfig).then (function (stream) {
 			
 							video.srcObject = stream;
                     					video.play();
@@ -52,20 +54,20 @@
             				}
 
             				else if (navigator.getUserMedia) {
-						navigator.getUserMedia(mediaConfig, function(stream) {
+						navigator.getUserMedia (mediaConfig, function (stream) {
 							video.src = stream;
 							video.play();
 						}, errBack);
 						
 					} else if (navigator.webkitGetUserMedia) {
-						navigator.webkitGetUserMedia (mediaConfig, function(stream) {
-							video.src = window.webkitURL.createObjectURL(stream);
+						navigator.webkitGetUserMedia (mediaConfig, function (stream) {
+							video.src = window.webkitURL.createObjectURL (stream);
 							video.play();
 						}, errBack);
 						
 					} else if (navigator.mozGetUserMedia) {
-						navigator.mozGetUserMedia (mediaConfig, function(stream) {
-							video.src = window.URL.createObjectURL(stream);
+						navigator.mozGetUserMedia (mediaConfig, function (stream) {
+							video.src = window.URL.createObjectURL (stream);
 							video.play();
 						}, errBack);
 					}
