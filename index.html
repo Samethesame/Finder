@@ -37,8 +37,10 @@
 						else video.pause();
 						
 						if (document.getElementById('snap') === "screenshot") document.getElementById('snap').value = "redo";
-						else document.getElementById('snap').value = "screenshot";
+						else document.getElementById('snap').value = "shot";
+						//else document.getElementById('snap').value = "screenshot";
 						//context.drawImage(video, 0, 0);
+						replaceButtonText('myButton2', document.getElementById('button2Name').value);
 						}
 					);
 			
