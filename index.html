@@ -7,8 +7,8 @@
 	<body>
 		<div>
 			<!--video feed-->
-			<video id="video" width="640" height="480" autoplay></video>
-			<canvas id="canvas" width="640" height="480"></canvas>
+			<video id="video" width="480" height="640" autoplay></video>
+			<canvas id="canvas" width="480" height="640"></canvas>
 			
 			<br>
 			
@@ -60,7 +60,7 @@
 
 					//Trigger photo take
 					document.getElementById('snap').addEventListener('click', function() {
-						context.drawImage(video, 0, 0, 640, 480);
+						context.drawImage(video, 0, 0, 480, 640);
 					});
 				}, false);
 				
