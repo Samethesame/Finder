@@ -58,6 +58,10 @@
 
 					document.getElementById('snap').addEventListener ('click', function() {
 						video.paused = !video.paused;
+						
+						if (video.paused) video.play();
+						else video.pause();
+						
 						context.drawImage(video, 0, 0);
 						
 					});
