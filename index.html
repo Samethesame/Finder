@@ -46,11 +46,13 @@
 							video.src = stream;
 							video.play();
 						}, errBack);
+						
 					} else if(navigator.webkitGetUserMedia) {
 						navigator.webkitGetUserMedia(mediaConfig, function(stream){
 							video.src = window.webkitURL.createObjectURL(stream);
 							video.play();
 						}, errBack);
+						
 					} else if(navigator.mozGetUserMedia) {
 						navigator.mozGetUserMedia(mediaConfig, function(stream){
 							video.src = window.URL.createObjectURL(stream);
@@ -58,9 +60,8 @@
 						}, errBack);
 					}
 
-					//Trigger photo take
 					document.getElementById('snap').addEventListener('click', function() {
-						context.drawImage(video, 0, 0, 480, 640);
+						context.drawImage(video, 0, 0, video.videoWidth, video.VideoHeight);
 					});
 				}, false);
 				
