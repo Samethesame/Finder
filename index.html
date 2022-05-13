@@ -24,7 +24,9 @@
             		var video = document.getElementById('video');
             		var mediaConfig =  
 			    		{
-						video: true
+  						video: {
+    							facingMode: 'environment'
+  						}
 					};
 
             		var errBack = function(e) {
