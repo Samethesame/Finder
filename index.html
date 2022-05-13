@@ -62,8 +62,8 @@
 						if (video.paused) video.play();
 						else video.pause();
 						
-						if (document.getElementById('snap') === "screenshot") document.getElementById('snap').innerText = "redo";
-						else document.getElementById('snap').innerText = "screenshot";
+						if (document.getElementById('snap') === "screenshot") document.getElementById('snap').value = "redo";
+						else document.getElementById('snap').innerText = "value";
 						//context.drawImage(video, 0, 0);
 					});
 				}, false);
