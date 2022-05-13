@@ -29,7 +29,22 @@
             			console.log('An error has occurred', e)
             		};
 
-           		 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			videoPlayer();
+
+					document.getElementById('snap').addEventListener ('click', function() {
+						video.paused = !video.paused;
+						
+						if (video.paused) video.play();
+						else video.pause();
+						
+						if (document.getElementById('snap') === "screenshot") document.getElementById('snap').value = "redo";
+						else document.getElementById('snap').innerText = "value";
+						//context.drawImage(video, 0, 0);
+					});
+				}, false);
+			
+			function videoPlayer() {
+				        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 				navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
 			
 							video.srcObject = stream;
@@ -55,18 +70,7 @@
 							video.play();
 						}, errBack);
 					}
-
-					document.getElementById('snap').addEventListener ('click', function() {
-						video.paused = !video.paused;
-						
-						if (video.paused) video.play();
-						else video.pause();
-						
-						if (document.getElementById('snap') === "screenshot") document.getElementById('snap').value = "redo";
-						else document.getElementById('snap').innerText = "value";
-						//context.drawImage(video, 0, 0);
-					});
-				}, false);
+			}
 				
 			</script>
 		</div>
