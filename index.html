@@ -30,34 +30,6 @@
             		};
 
 			videoPlayer();
-					/*if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-						
-                				navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
-			
-							video.srcObject = stream;
-                    					video.play();
-               		 			});
-            				}
-
-            				else if (navigator.getUserMedia) {
-						navigator.getUserMedia(mediaConfig, function(stream) {
-							video.src = stream;
-							video.play();
-						}, errBack);
-						
-					} else if (navigator.webkitGetUserMedia) {
-						navigator.webkitGetUserMedia (mediaConfig, function(stream) {
-							video.src = window.webkitURL.createObjectURL(stream);
-							video.play();
-						}, errBack);
-						
-					} else if (navigator.mozGetUserMedia) {
-						navigator.mozGetUserMedia (mediaConfig, function(stream) {
-							video.src = window.URL.createObjectURL(stream);
-							video.play();
-						}, errBack);
-					}
-
 					document.getElementById('snap').addEventListener ('click', function() {
 						video.paused = !video.paused;
 						
@@ -68,7 +40,7 @@
 						else document.getElementById('snap').value = "screenshot";
 						//context.drawImage(video, 0, 0);
 						}
-					);*/
+					);
 			
 			function videoPlayer() {
 				        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
