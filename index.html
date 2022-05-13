@@ -22,7 +22,12 @@
             		var canvas = document.getElementById('canvas');
             		var context = canvas.getContext('2d');
             		var video = document.getElementById('video');
-            		var mediaConfig =  { video: true };
+            		var mediaConfig =  
+			    		{
+						video: 
+						{facingMode: {exact: 'environment'}}
+					};
+
             		var errBack = function(e) {
             			console.log('An error has occurred', e)
             		};
@@ -54,7 +59,7 @@
 
 					//Trigger photo take
 					document.getElementById('snap').addEventListener('click', function() {
-						context.drawImage(video, 0, 0, 640, 480);
+						context.drawImage(video, 0, 0, 675, 1200);
 					});
 				}, false);
 				
