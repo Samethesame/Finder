@@ -110,11 +110,35 @@
 
 					var offset = canvas.getBoundingClientRect();
 
-					var color = context.getImageData(event.clientX - offset.left, event.clientY - offset.top, 720, 540);
-					document.getElementById ('scan').innerText = "colour: " + color.data[0] + ", " + color.data[1] + ", " + color.data[2];
-					document.getElementById ('scan').style.color = "rgb(" + color.data[0] + "," + color.data[1] + "," + color.data[2] + ")";
+					var color = context.getImageData(0, 0, 720, 540);
+
+					var check = context.getImageData(event.clientX - offset.left, event.clientY - offset.top, 1, 1);
+					
+					document.getElementById ('scan').innerText = "colour: " + check.data[0] + ", " + check.data[1] + ", " + check.data[2];
+					document.getElementById ('scan').style.color = "rgb(" + check.data[0] + "," + check.data[1] + "," + check.data[2] + ")";
 
 					document.getElementById ('pick').innerText = "pick colour";
+					
+					var range = 6;
+
+					for (var i = 0; i < color.data.length; i += 4) {
+					
+						if (
+							!((check.data[0] - range < color.data[i]) &&
+								(check.data[0] + range > color.data[i])) ||
+
+							!((check.data[1] - range < color.data[i + 1]) &&
+								(check.data[1] + range > color.data[i + 1])) ||
+							
+							!((check.data[2] - range < color.data[i + 2]) &&
+								(check.data[2] + range > color.data[i + 2]))
+						) {
+
+							color.data[i + 3] = 20;
+						}
+					}
+
+					context.putImageData (color, 0, 0);
 				}
 			});
 
