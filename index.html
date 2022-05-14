@@ -44,7 +44,7 @@
 			<!--captures the camera photo-->
 			<button class="button submit" id="snap">capture</button>
 			<hr>
-			<button class="button select" id="pick">pick colour</button>		
+			<button class="button select" id="pick">colour remove</button>
 			<hr>
 			<button class="button find" id="solve">solve</button>
 			<hr>
@@ -97,16 +97,19 @@
 						
 				var pick = document.getElementById ('pick');
 				
-				if (pick.innerText === "pick colour") {
+				if (pick.innerText === "colour remove") {
 						
-					pick.innerText = "stop colour pick";
+					pick.innerText = "stop colour remove";
+				} else {
+
+					pick.innerText = "colour remove";
 				}
 
 			});
 
 			canvas.addEventListener ('click', function() {
 
-				if (document.getElementById ('pick').innerText === "stop colour pick") {
+				if (document.getElementById ('pick').innerText === "stop colour remove") {
 
 					var offset = canvas.getBoundingClientRect();
 
@@ -117,21 +120,21 @@
 					document.getElementById ('scan').innerText = "colour: " + check.data[0] + ", " + check.data[1] + ", " + check.data[2];
 					document.getElementById ('scan').style.color = "rgb(" + check.data[0] + "," + check.data[1] + "," + check.data[2] + ")";
 
-					document.getElementById ('pick').innerText = "pick colour";
+					document.getElementById ('pick').innerText = "colour remove";
 					
-					var range = 10;
+					var range = 5;
 
 					for (var i = 0; i < color.data.length; i += 4) {
 					
 						if (
-							!((check.data[0] - range < color.data[i]) &&
-								(check.data[0] + range > color.data[i])) ||
+							!((check.data[0] - range > color.data[i]) &&
+								(check.data[0] + range < color.data[i])) ||
 
-							!((check.data[1] - range < color.data[i + 1]) &&
-								(check.data[1] + range > color.data[i + 1])) ||
+							!((check.data[1] - range > color.data[i + 1]) &&
+								(check.data[1] + range < color.data[i + 1])) ||
 							
-							!((check.data[2] - range < color.data[i + 2]) &&
-								(check.data[2] + range > color.data[i + 2]))
+							!((check.data[2] - range > color.data[i + 2]) &&
+								(check.data[2] + range < color.data[i + 2]))
 						) {
 
 							color.data[i + 3] = 20;
