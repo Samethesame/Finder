@@ -127,14 +127,14 @@
 					for (var i = 0; i < color.data.length; i += 4) {
 					
 						if (
-							!((check.data[0] - range > color.data[i]) &&
-								(check.data[0] + range < color.data[i])) ||
+							((check.data[0] - range < color.data[i]) &&
+								(check.data[0] + range > color.data[i])) ||
 
-							!((check.data[1] - range > color.data[i + 1]) &&
-								(check.data[1] + range < color.data[i + 1])) ||
+							((check.data[1] - range < color.data[i + 1]) &&
+								(check.data[1] + range > color.data[i + 1])) ||
 							
-							!((check.data[2] - range > color.data[i + 2]) &&
-								(check.data[2] + range < color.data[i + 2]))
+							((check.data[2] - range < color.data[i + 2]) &&
+								(check.data[2] + range > color.data[i + 2]))
 						) {
 
 							color.data[i + 3] = 20;
