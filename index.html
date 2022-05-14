@@ -3,7 +3,9 @@
 <html>
 	<head>
 		<title>Finder</title>
-		
+	</head>
+	<body>
+		<div>	
 			<style>
 				.middle {
 					border: none;
@@ -24,10 +26,12 @@
 				}
 
 				.submit {background-color: #000000;}
+
+				.find {background-color: #008000;}
 			
 			</style>
-	</head>
-	<body>
+		</div>
+		
 		<div align="center">
 			<!--video feed-->
 			<video class= "middle" id="video" width="720" height="540" autoplay></video>
@@ -37,6 +41,8 @@
 			
 			<!--captures the camera photo-->
 			<button class="button submit" id="snap">capture</button>
+			<hr>
+			<button class="button find" id="solve">solve</button>
 			
 			<script type="text/javascript">
 				
@@ -62,6 +68,14 @@
 						if (document.getElementById ('snap').innerText === "capture") document.getElementById('snap').innerText = "redocap";
 						else document.getElementById ('snap').innerText = "capture";
 						//context.drawImage(video, 0, 0);
+						}
+					);
+
+
+					document.getElementById ('solve').addEventListener ('click', function () {
+						if (document.getElementById ('solve').innerText === "solve") document.getElementById('solve').innerText = "stop solve";
+						else document.getElementById ('solve').innerText = "solve";
+	
 						}
 					);
 			
