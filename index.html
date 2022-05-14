@@ -28,6 +28,8 @@
 
 				.submit {background-color: #000000;}
 
+				.select {background-color: #004000;}
+
 				.find {background-color: #008000;}
 		
 			</style>
@@ -36,20 +38,31 @@
 		<div align="center">
 			<!--video feed-->
 			<video class= "middle" id="video" width="720" height="540" autoplay></video>
-			<canvas id="canvas" width="0" height="0"></canvas>
 			
 			<br>
 			
 			<!--captures the camera photo-->
 			<button class="button submit" id="snap">capture</button>
 			<hr>
+			<button class="button select" id="pick">pick colour</button>		
+			<hr>
 			<button class="button find" id="solve">solve</button>
+			<hr>
 			
+			<div id="container">
+
+				<p id="scan">colour: 0, 0, 0</p>
+			</div>
+			
+			<canvas id="canvas" width="720" height="540"></canvas>
+		</div>
+
+		<div>
 			<script type="text/javascript">
 				
 			window.addEventListener ("DOMContentLoaded", function () {
 
-            		//var canvas = document.getElementById ('canvas');
+            		var canvas = document.getElementById ('canvas');
             		var context = canvas.getContext('2d');
 			
             		var video = document.getElementById ('video');
@@ -60,69 +73,91 @@
             		};
 
 			videoPlayer();
-					document.getElementById ('snap').addEventListener ('click', function () {
+			
+			document.getElementById ('snap').addEventListener ('click', function () {
 						
-						video.paused = !video.paused;
+				video.paused = !video.paused;
 						
-						if (video.paused) video.play();
-						else video.pause();
+				if (video.paused) video.play();
+				else video.pause();
 						
-						var snap = document.getElementById ('snap');
+				var snap = document.getElementById ('snap');
 
-						if (snap.innerText === "capture") {
+				if (snap.innerText === "capture") {
 
-							snap.innerText = "redocap";
-						} else {
-							snap.innerText = "capture";
-						}
+					snap.innerText = "redocap";
+				} else {
+					snap.innerText = "capture";
+				}
 
-						//context.drawImage(video, 0, 0);
+				context.drawImage (video, 0, 0, 720, 540);
+			});
 
-					});
-
-
-					document.getElementById ('solve').addEventListener ('click', function () {
+			document.getElementById ('pick').addEventListener ('click', function () {
 						
-						var solve = document.getElementById ('solve');
-
-						if (solve.innerText === "solve") {
+				var pick = document.getElementById ('pick');
+				
+				if (pick.innerText === "pick colour") {
 						
-							solve.innerText = "stop solve";
-						} else {
-							solve.innerText = "solve";
-						}
+					pick.innerText = "stop colour pick";
+				}
+
+			});
+
+			canvas.addEventListener ('click', function() {
+
+				if (document.getElementById ('pick').innerText === "stop colour pick") {
+
+					var color = context.getImageData(event.clientX - 313, event.clientY - 108, 720, 540);
+					document.getElementById ('scan').innerText = "colour: " + color.data[0] + ", " + color.data[1] + ", " + color.data[2];
+					document.getElementById ('scan').style.color = "rgb(" + color.data[0] + "," + color.data[1] + "," + color.data[2] + ")";
+
+					document.getElementById ('pick').innerText = "pick colour";
+				}
+			});
+
+			document.getElementById ('solve').addEventListener ('click', function () {
+						
+				var solve = document.getElementById ('solve');
+
+				if (solve.innerText === "solve") {
+				
+					solve.innerText = "stop solve";
+				} else {
+					solve.innerText = "solve";
+				}
 	
-					});
+			});
 			
 			function videoPlayer() {
 				
-				        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+				if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 						
-                				navigator.mediaDevices.getUserMedia (mediaConfig).then (function (stream) {
+                			navigator.mediaDevices.getUserMedia (mediaConfig).then (function (stream) {
 			
-							video.srcObject = stream;
-                    					video.play();
-               		 			});
-            				}
+						video.srcObject = stream;
+                    				video.play();
+               		 		});
+            			}
 
-            				else if (navigator.getUserMedia) {
-						navigator.getUserMedia (mediaConfig, function (stream) {
-							video.src = stream;
-							video.play();
-						}, errBack);
+            			else if (navigator.getUserMedia) {
+					navigator.getUserMedia (mediaConfig, function (stream) {
+						video.src = stream;
+						video.play();
+					}, errBack);
 						
-					} else if (navigator.webkitGetUserMedia) {
-						navigator.webkitGetUserMedia (mediaConfig, function (stream) {
-							video.src = window.webkitURL.createObjectURL (stream);
-							video.play();
-						}, errBack);
+				} else if (navigator.webkitGetUserMedia) {
+					navigator.webkitGetUserMedia (mediaConfig, function (stream) {
+						video.src = window.webkitURL.createObjectURL (stream);
+						video.play();
+					}, errBack);
 						
-					} else if (navigator.mozGetUserMedia) {
-						navigator.mozGetUserMedia (mediaConfig, function (stream) {
-							video.src = window.URL.createObjectURL (stream);
-							video.play();
-						}, errBack);
-					}
+				} else if (navigator.mozGetUserMedia) {
+					navigator.mozGetUserMedia (mediaConfig, function (stream) {
+						video.src = window.URL.createObjectURL (stream);
+						video.play();
+					}, errBack);
+				}
 			}
 				
 			}, false);
