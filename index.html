@@ -3,35 +3,35 @@
 <html>
 	<head>
 		<title>Finder</title>
+		
+			<div>	
+				<style>
+					.middle {
+						border: none;
+						margin: auto;
+					}
+				
+					.button {
+						border: none;
+						color: white;
+ 						width: 710px;
+						height: 20px;
+					
+ 						text-decoration: none;
+						display: inline-block;	
+ 						font-size: 16px;
+					
+ 						cursor: pointer;
+					}
+
+					.submit {background-color: #000000;}
+
+					.find {background-color: #008000;}
+			
+				</style>
+			</div>
 	</head>
 	<body>
-		<div>	
-			<style>
-				.middle {
-					border: none;
-					margin: auto;
-				}
-				
-				.button {
-					border: none;
-					color: white;
- 					width: 710px;
-					height: 20px;
-					
- 					text-decoration: none;
-					display: inline-block;	
- 					font-size: 16px;
-					
- 					cursor: pointer;
-				}
-
-				.submit {background-color: #000000;}
-
-				.find {background-color: #008000;}
-			
-			</style>
-		</div>
-		
 		<div align="center">
 			<!--video feed-->
 			<video class= "middle" id="video" width="720" height="540" autoplay></video>
@@ -60,24 +60,38 @@
 
 			videoPlayer();
 					document.getElementById ('snap').addEventListener ('click', function () {
+						
 						video.paused = !video.paused;
 						
 						if (video.paused) video.play();
 						else video.pause();
 						
-						if (document.getElementById ('snap').innerText === "capture") document.getElementById('snap').innerText = "redocap";
-						else document.getElementById ('snap').innerText = "capture";
-						//context.drawImage(video, 0, 0);
+						var snap = document.getElementById ('snap');
+
+						if (snap.innerText === "capture") {
+
+							snap.innerText = "redocap";
+						} else {
+							snap.innerText = "capture";
 						}
-					);
+
+						//context.drawImage(video, 0, 0);
+
+					});
 
 
 					document.getElementById ('solve').addEventListener ('click', function () {
-						if (document.getElementById ('solve').innerText === "solve") document.getElementById('solve').innerText = "stop solve";
-						else document.getElementById ('solve').innerText = "solve";
-	
+						
+						var solve = document.getElementById ('solve');
+
+						if (solve.innerText === "solve") {
+						
+							solve.innerText = "stop solve";
+						} else {
+							solve.innerText = "solve";
 						}
-					);
+	
+					});
 			
 			function videoPlayer() {
 				
