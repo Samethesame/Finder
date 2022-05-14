@@ -108,7 +108,9 @@
 
 				if (document.getElementById ('pick').innerText === "stop colour pick") {
 
-					var color = context.getImageData(event.clientX - 313, event.clientY - 108, 720, 540);
+					var offset = canvas.getBoundingClientRect();
+
+					var color = context.getImageData(event.clientX - offset.left, event.clientY - offset.top, 720, 540);
 					document.getElementById ('scan').innerText = "colour: " + color.data[0] + ", " + color.data[1] + ", " + color.data[2];
 					document.getElementById ('scan').style.color = "rgb(" + color.data[0] + "," + color.data[1] + "," + color.data[2] + ")";
 
