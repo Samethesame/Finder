@@ -1010,7 +1010,8 @@
       }
 
       navigator.getUserMedia(constraints, function(stream) {
-        elt.src = window.URL.createObjectURL(stream);
+        //elt.src = window.URL.createObjectURL(stream);
+        elt.srcObject = stream;
           if (cb) {
             cb(stream);
           }
