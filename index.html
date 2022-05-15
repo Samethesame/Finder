@@ -34,20 +34,21 @@
 		
 			</style>
 		</div>
-		<div align="center" id="top"></div>
+		<div align="center" id="top">
+		<!--video feed-->
+		</div>
 		<div align="center" id="base">
-			<!--video feed-->
-			<!--video class= "middle" id="video" width="720" height="540" autoplay--><!--/video-->
-			
 			<br>
 			<!--captures the camera photo-->
 			<button class="button submit" id="snap">capture</button>
 			<hr>
 			<button class="button put" id="place">place</button>
-			<hr>	
+			<p id="rtag">node size: 5</p>
+			<input type="range" min="1" max="10" val="5" class="slider" id="rvalue">
+			<hr>
 			<button class="button find" id="solve">solve</button>
 			<hr>
-			<!--canvas id="screen" width="720" height="540"--><!--/canvas-->
+			<!--canvas-->
 		</div>
 
 		<div>
@@ -57,7 +58,7 @@
 
    	 		<script type="text/javascript" src="sketch/sketch.js"></script>
 			<script type="text/javascript">
-			
+
 			window.addEventListener ("DOMContentLoaded", function () {
 			
 			var position;
@@ -68,8 +69,6 @@
             		
 				console.log ('An error has occurred', e);
             		};
-
-			//videoPlayer();
 			
 			document.getElementById ('snap').addEventListener ('click', function () {
 				
@@ -78,10 +77,10 @@
 				if (snap.innerText === "capture") {
 
 					snap.innerText = "redocap";
-
-					list = [];
 				} else {
 					snap.innerText = "capture";
+
+					list = [];
 				}
 
 			});
@@ -109,6 +108,13 @@
 					solve.innerText = "solve";
 				}
 	
+			});
+
+			document.getElementById ('rvalue').addEventListener ('change', function () {
+
+				radius = document.getElementById ('rvalue').value;
+
+				document.getElementById ('rtag').innerText = "node size: " + document.getElementById ('rvalue').value;
 			});
 
 			}, false);
