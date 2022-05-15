@@ -26,7 +26,7 @@ function draw() {
 		document.getElementById ('video').pause();
 	} else {
 
-		document.getElementById ('video').play();
+		//document.getElementById ('video').play();
 	}
 
 	image (video, 0, 0, width, width * video.length / video.width);
