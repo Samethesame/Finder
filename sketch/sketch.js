@@ -1,4 +1,4 @@
-var video;
+/*var video;
 var canvas;
 var radius = 5;
 var list = [];
@@ -19,7 +19,7 @@ function draw() {
 
 	background (0);
 
-	/*translate (0, 0);
+	translate (0, 0);
 
 	if (document.getElementById ('snap').innerText === "redocap") {
 
@@ -35,7 +35,7 @@ function draw() {
 
 	for (var i = 0; i < list.length; i++) {
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
-	}*/
+	}
 }
 
 function mouseClicked() {
@@ -44,4 +44,4 @@ function mouseClicked() {
 
   		list[list.length] = {x: mouseX, y: mouseY};
 	}
-}
+}*/
