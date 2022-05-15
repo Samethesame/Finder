@@ -71,8 +71,8 @@
 				console.log ('An error has occurred', e);
             		};
 			
-			document.getElementById ('snap').addEventListener ('click', function () {
-				
+			//document.getElementById ('snap').addEventListener ('click', function () {
+			document.getElementById ('snap').onclick = function() {
 				var snap = document.getElementById ('snap');
 
 				if (snap.innerText === "capture") {
