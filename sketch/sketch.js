@@ -5,11 +5,11 @@ var list = [];
 
 function setup() {
 	video = createCapture (VIDEO);
-	video.size (720, 540);
-
+	video.size (640, 480);
+	video.id ('video');
 	video.parent ("top");
 
-	canvas = createCanvas (720, 540);
+	canvas = createCanvas (640, 480);
 
 	canvas.id ('canvas');
 	canvas.parent ("base");
@@ -21,7 +21,7 @@ function draw() {
 
 	translate (0, 0);
 
-	image (video, 0, 0, width, width * video.height / video.width);
+	image (video, 0, 0);
 
 	fill (0, 255, 0, 200);
 
