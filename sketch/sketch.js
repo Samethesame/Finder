@@ -19,14 +19,14 @@ function draw() {
 
 	background (0);
 
-	translate (0, 0);
+	/*translate (0, 0);
 
 	if (document.getElementById ('snap').innerText === "redocap") {
 
 		document.getElementById ('video').pause();
 	} else {
 
-		//document.getElementById ('video').play();
+	document.getElementById ('video').play();
 	}
 
 	image (video, 0, 0, width, width * video.length / video.width);
@@ -35,7 +35,7 @@ function draw() {
 
 	for (var i = 0; i < list.length; i++) {
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
-	}
+	}*/
 }
 
 function mouseClicked() {
