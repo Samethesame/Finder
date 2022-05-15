@@ -12,7 +12,7 @@ function setup() {
 	canvas = createCanvas (640, 480);
 
 	canvas.id ('canvas');
-	canvas.parent ("base");
+	canvas.parent ("bottom");
 }
 
 function draw() {
