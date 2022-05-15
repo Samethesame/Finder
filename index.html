@@ -26,11 +26,11 @@
  					cursor: pointer;
 				}
 
-				//.submit {background-color: #000000;}
+				.submit {background-color: #000000;}
 				
 				.put {background-color: #004000;}
 
-				//.find {background-color: #008000;}
+				.find {background-color: #008000;}
 		
 			</style>
 		</div>
@@ -40,7 +40,7 @@
 		<div align="center" id="base">
 			<br>
 			<!--captures the camera photo-->
-			<!--button class="button submit" id="snap">capture</button-->
+			<button class="button submit" id="snap">capture</button>
 			<hr>
 			<button class="button put" id="place">place</button>
 			<!--p id="rtag">node size: 5</p>
@@ -71,8 +71,8 @@
 				console.log ('An error has occurred', e);
             		};
 			
-			//document.getElementById ('snap').addEventListener ('click', function () {
-			/*document.getElementById ('snap').onclick = function() {
+			document.getElementById ('snap').addEventListener ('click', function () {
+
 				var snap = document.getElementById ('snap');
 
 				if (snap.innerText === "capture") {
@@ -81,10 +81,10 @@
 				} else {
 					snap.innerText = "capture";
 
-					list = [];
+					//list = [];
 				}
 
-			});*/
+			});
 
 			document.getElementById ('place').addEventListener ('click', function () {
 				
