@@ -1009,7 +1009,8 @@
         constraints = {video: useVideo, audio: useAudio};
       }
 
-      navigator.getUserMedia(constraints, function(stream) {
+	navigator.getUserMedia ({video: {facingMode: 'environment'}}, function (stream) {
+      //navigator.getUserMedia(constraints, function(stream) {
         //elt.src = window.URL.createObjectURL(stream);
         elt.srcObject = stream;
           if (cb) {
