@@ -28,9 +28,9 @@
 
 				.submit {background-color: #000000;}
 				
-				.put {background-color: #004000;}
+				/*.put {background-color: #004000;}
 
-				.find {background-color: #008000;}
+				.find {background-color: #008000;}*/
 		
 			</style>
 		</div>
@@ -40,14 +40,14 @@
 		<div align="center" id="base">
 			<br>
 			<!--captures the camera photo-->
-			<button class="button submit" id="snap">capture</button>
+			<!--button class="button submit" id="snap">capture</button-->
 			<hr>
 			<button class="button put" id="place">place</button>
-			<p id="rtag">node size: 5</p>
+			<!--p id="rtag">node size: 5</p>
 			<input type="range" min="1" max="10" val="5" class="slider" id="rvalue">
 			<hr>
 			<button class="button find" id="solve">solve</button>
-			<hr>
+			<hr-->
 		</div>
 		<div align="center" id="bottom">
 		<!--canvas-->
@@ -62,9 +62,9 @@
 
 			window.addEventListener ("DOMContentLoaded", function () {
 			
-			var position;
+			//var position;
 
-            		var mediaConfig =  {video: {facingMode: 'environment'}};
+            		//var mediaConfig =  {video: {facingMode: 'environment'}};
 
             		var errBack = function(e) {
             		
@@ -72,7 +72,7 @@
             		};
 			
 			//document.getElementById ('snap').addEventListener ('click', function () {
-			document.getElementById ('snap').onclick = function() {
+			/*document.getElementById ('snap').onclick = function() {
 				var snap = document.getElementById ('snap');
 
 				if (snap.innerText === "capture") {
@@ -84,7 +84,7 @@
 					list = [];
 				}
 
-			});
+			});*/
 
 			document.getElementById ('place').addEventListener ('click', function () {
 				
@@ -98,7 +98,7 @@
 				}
 			});
 
-			document.getElementById ('solve').addEventListener ('click', function () {
+			/*document.getElementById ('solve').addEventListener ('click', function () {
 						
 				var solve = document.getElementById ('solve');
 
@@ -116,7 +116,7 @@
 				radius = document.getElementById ('rvalue').value;
 
 				document.getElementById ('rtag').innerText = "node size: " + document.getElementById ('rvalue').value;
-			});
+			});*/
 
 			}, false);
 			
