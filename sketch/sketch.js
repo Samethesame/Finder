@@ -1,4 +1,4 @@
-/*var video;
+var video;
 var canvas;
 var radius = 5;
 var list = [];
@@ -15,7 +15,7 @@ function setup() {
 	canvas.parent ("bottom");
 }
 
-function draw() {
+/*function draw() {
 
 	background (0);
 
@@ -36,9 +36,9 @@ function draw() {
 	for (var i = 0; i < list.length; i++) {
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
 	}
-}
+}*/
 
-function mouseClicked() {
+/*function mouseClicked() {
 
 	if (document.getElementById ('place').innerText === "stop placement") {
 
