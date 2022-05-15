@@ -27,146 +27,63 @@
 				}
 
 				.submit {background-color: #000000;}
-
-				.select {background-color: #003000;}
 				
-				.put {background-color: #006000;}
+				.put {background-color: #004000;}
 
-				.find {background-color: #009000;}
+				.find {background-color: #008000;}
 		
 			</style>
 		</div>
-
-		<div align="center">
+		<div align="center" id="top"></div>
+		<div align="center" id="base">
 			<!--video feed-->
-			<video class= "middle" id="video" width="720" height="540" autoplay></video>
+			<!--video class= "middle" id="video" width="720" height="540" autoplay--><!--/video-->
 			
 			<br>
 			<!--captures the camera photo-->
 			<button class="button submit" id="snap">capture</button>
 			<hr>
-
-			<button class="button select" id="pick">colour remove</button>
-			<br>
-			<p id="rtag">remove value: 10</p>
-			<input type="range" min="1" max="20" val="10" class="slider" id="rvalue">
-			<hr>
-			
 			<button class="button put" id="place">place</button>
 			<hr>	
 			<button class="button find" id="solve">solve</button>
 			<hr>
-			
-			<div id="container">
-
-				<p id="scan">colour: 0, 0, 0</p>
-			</div>
-			
-			<canvas id="canvas" width="720" height="540"></canvas>
+			<!--canvas id="screen" width="720" height="540"--><!--/canvas-->
 		</div>
 
 		<div>
    	 		<script type="text/javascript" src="libraries/p5.js"></script>
    	 		<script type="text/javascript" src="libraries/p5.dom.js"></script>
-   	 		<script type="text/javascript" src="sketch.js"></script>
+   	 		<script type="text/javascript" src="libraries/p5.sound.js"></script>
+
+   	 		<script type="text/javascript" src="sketch/sketch.js"></script>
 			<script type="text/javascript">
 			
 			window.addEventListener ("DOMContentLoaded", function () {
 			
-			var position = [];
+			var position;
 
-            		var canvas = document.getElementById ('canvas');
-            		var context = canvas.getContext('2d');
-			
-            		var video = document.getElementById ('video');
             		var mediaConfig =  {video: {facingMode: 'environment'}};
 
             		var errBack = function(e) {
-            			console.log('An error has occurred', e);
+            		
+				console.log ('An error has occurred', e);
             		};
 
-			videoPlayer();
+			//videoPlayer();
 			
 			document.getElementById ('snap').addEventListener ('click', function () {
-						
-				video.paused = !video.paused;
-						
-				if (video.paused) video.play();
-				else video.pause();
-						
+				
 				var snap = document.getElementById ('snap');
 
 				if (snap.innerText === "capture") {
 
 					snap.innerText = "redocap";
+
+					list = [];
 				} else {
 					snap.innerText = "capture";
 				}
 
-				context.drawImage (video, 0, 0, 720, 540);
-			});
-
-			document.getElementById ('pick').addEventListener ('click', function () {
-						
-				var pick = document.getElementById ('pick');
-				
-				if (pick.innerText === "colour remove") {
-						
-					pick.innerText = "stop colour remove";
-				} else {
-
-					pick.innerText = "colour remove";
-				}
-
-			});
-
-			canvas.addEventListener ('click', function() {
-
-				var offset = canvas.getBoundingClientRect();
-				
-				if (document.getElementById ('place').innerText === "stop placement") {
-					
-					position[position.length] = {x: event.clientX, y: event.clientY};
-
-					var radius = 10;
-					
-					ellipse (event.clientX - offset.left, event.clientY - offset.top, radius * 2);
-				}
-
-				if (document.getElementById ('pick').innerText === "stop colour remove") {
-
-					var offset = canvas.getBoundingClientRect();
-					var color = context.getImageData (0, 0, 720, 540);
-
-					var check = context.getImageData (event.clientX - offset.left, event.clientY - offset.top, 1, 1);
-					
-					document.getElementById ('scan').innerText = "colour: " + check.data[0] + ", " + check.data[1] + ", " + check.data[2];
-					document.getElementById ('scan').style.color = "rgb(" + check.data[0] + "," + check.data[1] + "," + check.data[2] + ")";
-
-					//document.getElementById ('pick').innerText = "colour remove";
-					
-					var range = document.getElementById ('rvalue').value;
-
-					for (var i = 0; i < color.data.length; i += 4) {
-					
-						if (
-							((check.data[0] - range < color.data[i]) &&
-								(check.data[0] + range > color.data[i])) &&
-
-							((check.data[1] - range < color.data[i + 1]) &&
-								(check.data[1] + range > color.data[i + 1])) &&
-							
-							((check.data[2] - range < color.data[i + 2]) &&
-								(check.data[2] + range > color.data[i + 2]))
-							
-						) {
-
-							color.data[i + 3] = 20;
-						}
-					}
-
-					context.putImageData (color, 0, 0);
-				}
 			});
 
 			document.getElementById ('place').addEventListener ('click', function () {
@@ -193,43 +110,7 @@
 				}
 	
 			});
-			
-			document.getElementById ('rvalue').addEventListener ('change', function () {
-				
-				document.getElementById ('rtag').innerText = "remove value: " + document.getElementById ('rvalue').value;
-			});
 
-			function videoPlayer() {
-				
-				if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-						
-                			navigator.mediaDevices.getUserMedia (mediaConfig).then (function (stream) {
-			
-						video.srcObject = stream;
-                    				video.play();
-               		 		});
-            			}
-
-            			else if (navigator.getUserMedia) {
-					navigator.getUserMedia (mediaConfig, function (stream) {
-						video.src = stream;
-						video.play();
-					}, errBack);
-						
-				} else if (navigator.webkitGetUserMedia) {
-					navigator.webkitGetUserMedia (mediaConfig, function (stream) {
-						video.src = window.webkitURL.createObjectURL (stream);
-						video.play();
-					}, errBack);
-						
-				} else if (navigator.mozGetUserMedia) {
-					navigator.mozGetUserMedia (mediaConfig, function (stream) {
-						video.src = window.URL.createObjectURL (stream);
-						video.play();
-					}, errBack);
-				}
-			}
-				
 			}, false);
 			
 			</script>
