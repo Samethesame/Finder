@@ -153,16 +153,16 @@ function specF (a) {
 
 	delete save [a];
 
-	for (b = 0; b < save.length; b++) {
+	for (b in list) {
 
 		var num = -1;
 		var bSpace = 2147483647;
 
-		for (c = 0; c < save.length; c++) {
+		for (c in save) {
 
 			var s = save[save.length - 1];
-			for (v in list) console.log(list[v]);
-			console.log(list[c]);
+			//for (v in list) console.log(list[v]);
+			//console.log(list[c]);
 			if (bSpace > distance (s.x, s.y, list[c].x, list[c].y)) {
 
 				num = c;
