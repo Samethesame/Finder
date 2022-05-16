@@ -6,7 +6,7 @@ let list = [];
 let snap;
 let place;
 let solve;
-let reset;
+let areset;
 let slider;
 
 function setup () {
@@ -103,7 +103,7 @@ function cset () {
 	snap = createButton ("capture");
 	place = createButton ("place");
 	solve = createButton ("solve");
-	reset = createButton ("reset");
+	areset = createButton ("reset");
 
 	snap.parent ("baseA");
 	place.parent ("baseB");
@@ -114,40 +114,40 @@ function cset () {
 	snap.id ('snap');
 	place.id ('place');
 	solve.id ('solve');
-	reset.id ('reset');
+	areset.id ('areset');
 
 	snap.style ('color', 'white');
 	place.style ('color', 'white');
 	solve.style ('color', 'white');
-	reset.style ('color', 'white');
+	areset.style ('color', 'white');
 
 	snap.style('border', 'none');
 	place.style('border', 'none');
 	solve.style('border', 'none');
-	reset.style('border', 'none');
+	areset.style('border', 'none');
 
 	snap.style ('width', '710px');
 	place.style ('width', '710px');
 	solve.style ('width', '710px');
-	reset.style ('width', '710px');
+	areset.style ('width', '710px');
 
 	snap.style ('height', '20px');
 	place.style ('height', '20px');
 	solve.style ('height', '20px');
-	reset.style ('height', '20px');
+	areset.style ('height', '20px');
 
 	snap.style ('font-size', '16px');
 	place.style ('font-size', '16px');
 	solve.style ('font-size', '16px');
-	reset.style ('font-size', '16px');
+	areset.style ('font-size', '16px');
 
 	snap.style ('background-color', '#000000');
 	place.style ('background-color', '#003000');
-	reset.style ('background-color', '#006000');
+	areset.style ('background-color', '#006000');
 	solve.style ('background-color', '#009000');
 
 	snap.mousePressed (photo);
 	place.mousePressed (placement);
 	solve.mousePressed (solver);
-	reset.mousePressed (mreset);
+	areset.mousePressed (mreset);
 }
