@@ -22,6 +22,8 @@ function setup () {
 	slider = createSlider (1, 10);
 
 	cset();
+
+	canvas.mouseReleased (rclick);
 }
 
 function draw() {
@@ -43,7 +45,7 @@ function draw() {
 	}
 }
 
-function mouseClicked () {
+function rclick () {
 
 	if (document.getElementById ('place').innerText === "stop placement") {
 
