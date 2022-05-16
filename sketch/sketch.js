@@ -2,6 +2,7 @@ let video;
 let canvas;
 let radius = 5;
 let list = [];
+let order = [];
 
 let snap;
 let place;
@@ -41,8 +42,13 @@ function draw() {
 
 	document.getElementById ('vtext').innerText = "node size: " + radius;
 
-	for (var i = 0; i < list.length; i++) {
+	for (i = 0; i < list.length; i++) {
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
+	}
+
+	for (l = 0; l < order.length; i++) {
+
+		text (l, order[l].x, order[l].y);
 	}
 }
 
@@ -68,6 +74,7 @@ function photo () {
 		video.play();
 
 		list = [];
+		order = [];
 	}
 }
 
@@ -86,11 +93,96 @@ function solver () {
 	var solve = document.getElementById ('solve');
 
 	if (solve.innerText === "solve") {
-				
+
 		solve.innerText = "stop solve";
+
+		order = finder ();
 	} else {
 		solve.innerText = "solve";
+
+		order = [];
 	}
+}
+
+function finder () {
+
+	var short = 2147483647;
+	var slist = [];
+
+	for (let a = 0; a < list.length; a++) {
+
+		var saved = specF (a);
+
+		if (short > saved.val) {
+
+			slist = [];
+
+			short = saved.val;
+
+			for (i = 0; i < list.length; i++) {
+				
+				slist[slist.length] = list[saved.list[i]];
+			}
+		}
+	}
+
+	return slist;
+}
+
+function cloneArray (array) {
+
+	var clone = {};
+
+	for (v in array) {
+
+		clone[v] = array[v];
+	}
+
+	return clone;
+}
+
+function specF (a) {
+
+	var aSpace = 0;
+
+	var save = cloneArray (list);
+
+	//for (v in save) console.log(save[v].x + " " + save[v].y);
+
+	var removed = [a];
+
+	delete save [a];
+
+	for (b = 0; b < save.length; b++) {
+
+		var num = -1;
+		var bSpace = 2147483647;
+
+		for (c = 0; c < save.length; c++) {
+
+			var s = save[save.length - 1];
+			for (v in list) console.log(list[v]);
+			console.log(list[c]);
+			if (bSpace > distance (s.x, s.y, list[c].x, list[c].y)) {
+
+				num = c;
+				bSpace  = distance (s.x, s.y, list[c].x, list[c].y);
+			}
+		}
+
+		aSpace += bSpace;
+
+		removed[removed.length] = save[num];
+
+		delete save[num];
+	}
+
+	return {val: aSpace, list: removed};
+}
+
+function distance (ax, ay, bx, by) {
+
+	return Math.sqrt ((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
 function mreset () {
