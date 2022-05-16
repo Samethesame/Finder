@@ -109,7 +109,7 @@ function cset () {
 	place.parent ("baseB");
 	slider.parent ("baseC");
 	solve.parent ("baseD");
-	reset.parent ("space");
+	areset.parent ("space");
 
 	snap.id ('snap');
 	place.id ('place');
