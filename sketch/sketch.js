@@ -3,8 +3,8 @@ var canvas;
 var radius = 5;
 var list = [];
 
-function setup() {
-	/*video = createCapture (VIDEO);
+/*function setup() {
+	video = createCapture (VIDEO);
 	video.size (640, 480);
 	video.id ('video');
 	video.parent ("top");
@@ -12,8 +12,8 @@ function setup() {
 	canvas = createCanvas (640, 480);
 
 	canvas.id ('canvas');
-	canvas.parent ("bottom");*/
-}
+	canvas.parent ("bottom");
+}*/
 
 /*function draw() {
 
