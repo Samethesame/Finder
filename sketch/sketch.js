@@ -20,7 +20,7 @@ function setup () {
 	canvas.id ('canvas');
 	canvas.parent ("bottom");
 
-	aslider = createSlider (1, 10);
+	aslider = createSlider (1, 10, 5);
 
 	cset();
 
