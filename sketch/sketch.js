@@ -36,7 +36,7 @@ function draw() {
 
 	image (video, 0, 0, width, width * video.length / video.width);
 
-	fill (0, 255, 0, 50);
+	fill (0, 255, 0, 200);
 
 	radius = aslider.value ();
 
