@@ -7,7 +7,7 @@ let snap;
 let place;
 let solve;
 let areset;
-let slider;
+let aslider;
 
 function setup () {
 	video = createCapture (VIDEO);
@@ -20,7 +20,7 @@ function setup () {
 	canvas.id ('canvas');
 	canvas.parent ("bottom");
 
-	slider = createSlider (1, 10);
+	aslider = createSlider (1, 10);
 
 	cset();
 
@@ -37,7 +37,7 @@ function draw() {
 
 	fill (0, 255, 0, 50);
 
-	radius = slider.value ();
+	radius = aslider.value ();
 
 	document.getElementById ('vtext').innerText = "node size: " + radius;
 
@@ -107,7 +107,7 @@ function cset () {
 
 	snap.parent ("baseA");
 	place.parent ("baseB");
-	slider.parent ("baseC");
+	aslider.parent ("baseC");
 	solve.parent ("baseD");
 	areset.parent ("space");
 
