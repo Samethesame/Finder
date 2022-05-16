@@ -24,7 +24,7 @@ function setup () {
 
 	cset();
 
-	canvas.mouseClicked (rclick);
+	canvas.mouseReleased (rclick);
 }
 
 function draw() {
