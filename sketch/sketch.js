@@ -149,7 +149,7 @@ function specF (a) {
 
 	var removed = [a];
 
-	delete save [a];
+	save.splice(a, a);
 
 	for (b in list) {
 
@@ -158,7 +158,7 @@ function specF (a) {
 
 		for (c in save) {
 
-			var s = save[save.length - 1];
+			var s = removed[removed.length - 1];
 			
 			if (bSpace > distance (s.x, s.y, list[c].x, list[c].y)) {
 
@@ -171,7 +171,7 @@ function specF (a) {
 
 		removed[removed.length] = save[num];
 
-		delete save[num];
+		splice (num, num);
 	}
 
 	return {val: aSpace, list: removed};
