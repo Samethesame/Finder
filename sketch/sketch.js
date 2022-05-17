@@ -131,7 +131,7 @@ function finder () {
 
 function cloneArray (array) {
 
-	var clone = {};
+	var clone = [];
 
 	for (v in array) {
 
@@ -147,8 +147,6 @@ function specF (a) {
 
 	var save = cloneArray (list);
 
-	//for (v in save) console.log(save[v].x + " " + save[v].y);
-
 	var removed = [a];
 
 	delete save [a];
@@ -161,8 +159,7 @@ function specF (a) {
 		for (c in save) {
 
 			var s = save[save.length - 1];
-			//for (v in list) console.log(list[v]);
-			//console.log(list[c]);
+			
 			if (bSpace > distance (s.x, s.y, list[c].x, list[c].y)) {
 
 				num = c;
@@ -181,7 +178,7 @@ function specF (a) {
 }
 
 function distance (ax, ay, bx, by) {
-
+	alert(ax + " " + Math.sqrt ((ax - bx) * (ax - bx) + (ay - by) * (ay - by)));
 	return Math.sqrt ((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
