@@ -43,12 +43,17 @@ function draw() {
 	document.getElementById ('vtext').innerText = "node size: " + radius;
 
 	for (i = 0; i < list.length; i++) {
+	
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
 	}
 
-	for (l = 0; l < order.length; i++) {
+	textSize (10 + radius);
 
-		text (l, order[l].x, order[l].y);
+	fill (255, 0, 0);
+
+	for (l = 0; l < order.length; l++) {
+
+		text (l + 1, order[l].x + 2 + radius * 2, order[l].y + 2 + radius * 2);
 	}
 }
 
@@ -96,6 +101,7 @@ function solver () {
 
 		solve.innerText = "stop solve";
 
+		//finds the shortest path between nodes
 		order = finder ();
 	} else {
 		solve.innerText = "solve";
@@ -106,27 +112,22 @@ function solver () {
 
 function finder () {
 
-	var short = 2147483647;
-	var slist = [];
+	var finalList = [];
 
-	for (let a = 0; a < list.length; a++) {
+	var shortL = 2147483647;
+	for (a = 0; a < list.length; a++) {
 
-		var saved = specF (a);
+		var hold = develop (a);
 
-		if (short > saved.val) {
+		if (shortL > hold.distance) {
 
-			slist = [];
+			shortL = hold.distance;
 
-			short = saved.val;
-
-			for (i = 0; i < list.length; i++) {
-				
-				slist[slist.length] = list[saved.list[i]];
-			}
+			finalList = cloneArray (hold.set);
 		}
 	}
 
-	return slist;
+	return finalList;
 }
 
 function cloneArray (array) {
@@ -141,50 +142,72 @@ function cloneArray (array) {
 	return clone;
 }
 
-function specF (a) {
+function nullAlt (length) {
 
-	var aSpace = 0;
+	var clone = [];
+
+	for (a = 0; a < length; a++) {
+
+		clone[a] = null;
+	}
+
+	return clone;
+}
+
+function develop (noR) {
+
+	var cnt = 0;
+
+	var distance = 0;
 
 	var save = cloneArray (list);
+	var removed = nullAlt (list.length);
 
-	var removed = [a];
+	removed[cnt] = save[noR];
 
-	save.splice(a, a);
+	save[noR] = null;
 
-	for (b in list) {
+	for (a = 0; a < list.length - 1; a++) {
 
-		var num = -1;
-		var bSpace = 2147483647;
+		var sNode = -1;
+		var shortL = 2147483647;
 
-		for (c in save) {
+		for (b = 0; b < list.length; b++) {
 
-			var s = removed[removed.length - 1];
-			
-			if (bSpace > distance (s.x, s.y, list[c].x, list[c].y)) {
+			if (save[b] != null) {
 
-				num = c;
-				bSpace  = distance (s.x, s.y, list[c].x, list[c].y);
+				var sizeL = dis (removed[cnt].x, removed[cnt].y, save[b].x, save[b].y);
+
+				if (shortL > sizeL) {
+
+					shortL = sizeL;
+
+					sNode = b;
+				}
 			}
 		}
 
-		aSpace += bSpace;
+		distance += shortL;
 
-		removed[removed.length] = save[num];
+		cnt++;
 
-		splice (num, num);
+		removed[cnt] = save[sNode];
+
+		save[sNode] = null;
 	}
 
-	return {val: aSpace, list: removed};
+	return {distance: distance, set: removed};
 }
 
-function distance (ax, ay, bx, by) {
-	alert(ax + " " + Math.sqrt ((ax - bx) * (ax - bx) + (ay - by) * (ay - by)));
+function dis (ax, ay, bx, by) {
+
 	return Math.sqrt ((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
 function mreset () {
 	
 	list = [];
+	order = [];
 }
 
 function cset () {
