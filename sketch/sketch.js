@@ -7,6 +7,8 @@ let order = [];
 let snap;
 let place;
 let solve;
+let elect;
+
 let areset;
 let aslider;
 
@@ -63,6 +65,11 @@ function rclick () {
 
   		list[list.length] = {x: mouseX, y: mouseY};
 	}
+	
+	if (document.getElementById ('elect').innerText === "stop select solve") {
+  	
+		locator ();
+	}
 }
 
 function photo () {
@@ -108,6 +115,37 @@ function solver () {
 
 		order = [];
 	}
+}
+
+function election () {
+	var place = document.getElementById ('elect');
+
+	if (place.innerText === "select solve") {
+
+		place.innerText = "stop select solve";
+	} else {
+		place.innerText = "select solve";
+	}
+}
+
+function locator() {
+
+	//finds the closest node to the mouse
+	var distance = 2147483647;
+	var cNode = -1;
+
+	for (i = 0; i < list.length; i++) {
+
+		var change = dis (mouseX, mouseY, list[i].x, list[i].y);
+
+		if (distance > change) {
+
+			distance = change;
+			cNode = i;
+		}
+	}
+
+	order = develop (cNode).set;
 }
 
 function finder () {
@@ -216,17 +254,20 @@ function cset () {
 	place = createButton ("place");
 	solve = createButton ("solve");
 	areset = createButton ("reset");
+	elect = createButton ("select solve");
 
 	snap.parent ("baseA");
 	place.parent ("baseB");
 	aslider.parent ("baseC");
 	solve.parent ("baseD");
 	areset.parent ("space");
+	elect.parent ("aElect");
 
 	snap.id ('snap');
 	place.id ('place');
 	solve.id ('solve');
 	areset.id ('areset');
+	elect.id ('elect');
 
 	coloring ();
 	
@@ -234,6 +275,7 @@ function cset () {
 	place.mousePressed (placement);
 	solve.mousePressed (solver);
 	areset.mousePressed (mreset);
+	elect.mousePressed (election);
 }
 
 function coloring() {
@@ -242,29 +284,35 @@ function coloring() {
 	place.style ('color', 'white');
 	solve.style ('color', 'white');
 	areset.style ('color', 'white');
+	elect.style ('color', 'white');
 
 	snap.style('border', 'none');
 	place.style('border', 'none');
 	solve.style('border', 'none');
 	areset.style('border', 'none');
+	elect.style('border', 'none');
 
 	snap.style ('width', '710px');
 	place.style ('width', '710px');
 	solve.style ('width', '710px');
 	areset.style ('width', '710px');
+	elect.style ('width', '710px');
 
 	snap.style ('height', '20px');
 	place.style ('height', '20px');
 	solve.style ('height', '20px');
 	areset.style ('height', '20px');
+	elect.style ('height', '20px');
 
 	snap.style ('font-size', '16px');
 	place.style ('font-size', '16px');
 	solve.style ('font-size', '16px');
 	areset.style ('font-size', '16px');
+	elect.style ('font-size', '16px');
 
 	snap.style ('background-color', '#000000');
-	place.style ('background-color', '#003000');
-	areset.style ('background-color', '#006000');
-	solve.style ('background-color', '#009000');
+	place.style ('background-color', '#002000');
+	areset.style ('background-color', '#004000');
+	solve.style ('background-color', '#006000');
+	elect.style ('background-color', '#008000');
 }
