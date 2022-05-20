@@ -8,9 +8,12 @@ let snap;
 let place;
 let solve;
 let elect;
+let changer;
 
 let areset;
 let aslider;
+
+let ncNode = -1;
 
 function setup () {
 	video = createCapture (VIDEO);
@@ -55,7 +58,7 @@ function draw() {
 
 	for (l = 0; l < order.length; l++) {
 
-		text (l + 1, order[l].x + 2 + radius * 2, order[l].y + 2 + radius * 2);
+		text (l + 1, order[l].val.x + 2 + radius * 2, order[l].val.y + 2 + radius * 2);
 	}
 }
 
@@ -70,9 +73,33 @@ function rclick () {
   	
 		locator ();
 	}
+
+	var sChangeV = document.getElementById ('changer');
+
+	if (order.length > 0 && order.length === list.length) {
+
+		if (sChangeV.innerText === "select new node position") {
+
+			ncNode = muFind ();
+
+			sChangeV.innerText = "select new node";
+
+		} else if (ncNode > -1) {
+
+			changeNode ();
+
+			ncNode = -1;
+
+			sChangeV.innerText = "change";
+		}
+	} else {
+	
+		sChangeV.innerText = "change";
+	}
 }
 
 function photo () {
+
 	var snap = document.getElementById ('snap');
 
 	if (snap.innerText === "capture") {
@@ -91,6 +118,7 @@ function photo () {
 }
 
 function placement () {
+
 	var place = document.getElementById ('place');
 
 	if (place.innerText === "place") {
@@ -102,6 +130,7 @@ function placement () {
 }
 
 function solver () {
+
 	var solve = document.getElementById ('solve');
 
 	if (solve.innerText === "solve") {
@@ -118,6 +147,7 @@ function solver () {
 }
 
 function election () {
+
 	var place = document.getElementById ('elect');
 
 	if (place.innerText === "select solve") {
@@ -128,7 +158,101 @@ function election () {
 	}
 }
 
-function locator() {
+function cselect () {
+
+	var moveV = document.getElementById ('changer');
+
+	if (moveV.innerText === "change") {
+
+ 		document.getElementById ('place').innerText = "place";
+
+		document.getElementById ('solve').innerText = "solve";
+
+		document.getElementById ('elect').innerText = "select solve";
+
+		moveV.innerText = "select new node position";
+	} else {
+		ncNode = -1;
+
+		moveV.innerText = "change";
+	}
+}
+
+function changeNode () {
+
+	if (order.length > 0) {
+
+		var cNod = muFind ();
+
+		var findA = getOrder (ncNode);
+		
+		var findB = getOrder (cNod);
+		
+		var save = order[findA];
+		
+		order[findA] = order[findB];
+		
+		order[findB] = save;
+		
+		//if (findA < findB) {
+			
+		changeVM (findA, findB);
+
+		//}
+	}
+}
+
+function changeVM (findA, findB) {
+
+	var saver = cloneArray (list);
+
+	var lower = findA > findB ? findB : findA;
+
+	for (i = 0; i < order.length; i++) {
+
+		if (i < lower + 1) {
+			
+			saver[order[i].pos] = null;
+
+		} else {
+			order[i] = null;
+		}
+	}
+
+	for (l = lower + 1; l < order.length; l++) {
+		
+		var account = forNode (saver, order, l - 1);
+
+		order[l] = {val: saver[account.sNode], pos: account.sNode};
+
+		saver[account.sNode] = null;
+	}
+}
+
+function getOrder (value) {
+
+	for (i = 0; i < order.length; i++) {
+
+		if (value === order[i].pos) {
+			
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+function locator () {
+
+	if (list.length > 0) {
+
+		var cNod = muFind ();
+
+		order = develop (cNod).set;
+	}
+}
+
+function muFind () {
 
 	//finds the closest node to the mouse
 	var distance = 2147483647;
@@ -145,7 +269,7 @@ function locator() {
 		}
 	}
 
-	order = develop (cNode).set;
+	return cNode;
 }
 
 function finder () {
@@ -201,40 +325,47 @@ function develop (noR) {
 	var save = cloneArray (list);
 	var removed = nullAlt (list.length);
 
-	removed[cnt] = save[noR];
+	removed[cnt] = {val: save[noR], pos: noR};
 
 	save[noR] = null;
 
 	for (a = 0; a < list.length - 1; a++) {
 
-		var sNode = -1;
-		var shortL = 2147483647;
+		var e = forNode (save, removed, cnt);
 
-		for (b = 0; b < list.length; b++) {
-
-			if (save[b] != null) {
-
-				var sizeL = dis (removed[cnt].x, removed[cnt].y, save[b].x, save[b].y);
-
-				if (shortL > sizeL) {
-
-					shortL = sizeL;
-
-					sNode = b;
-				}
-			}
-		}
-
-		distance += shortL;
+		distance += e.shortL;
 
 		cnt++;
 
-		removed[cnt] = save[sNode];
+		removed[cnt] = {val: save[e.sNode], pos: e.sNode};
 
-		save[sNode] = null;
+		save[e.sNode] = null;
 	}
 
 	return {distance: distance, set: removed};
+}
+
+function forNode (save, removed, cnt) {
+
+	var sNode = -1;
+	var shortL = 2147483647;
+
+	for (b = 0; b < list.length; b++) {
+
+		if (save[b] != null) {
+			
+			var sizeL = dis (removed[cnt].val.x, removed[cnt].val.y, save[b].x, save[b].y);
+
+			if (shortL > sizeL) {
+
+				shortL = sizeL;
+
+				sNode = b;
+			}
+		}
+	}
+
+	return {shortL: shortL, sNode: sNode};
 }
 
 function dis (ax, ay, bx, by) {
@@ -255,6 +386,7 @@ function cset () {
 	solve = createButton ("solve");
 	areset = createButton ("reset");
 	elect = createButton ("select solve");
+	changer = createButton ("change");
 
 	snap.parent ("baseA");
 	place.parent ("baseB");
@@ -262,12 +394,14 @@ function cset () {
 	solve.parent ("baseD");
 	areset.parent ("space");
 	elect.parent ("aElect");
+	changer.parent ("cSelect");
 
 	snap.id ('snap');
 	place.id ('place');
 	solve.id ('solve');
 	areset.id ('areset');
 	elect.id ('elect');
+	changer.id ('changer');
 
 	coloring ();
 	
@@ -276,6 +410,7 @@ function cset () {
 	solve.mousePressed (solver);
 	areset.mousePressed (mreset);
 	elect.mousePressed (election);
+	changer.mousePressed (cselect);
 }
 
 function coloring() {
@@ -285,34 +420,40 @@ function coloring() {
 	solve.style ('color', 'white');
 	areset.style ('color', 'white');
 	elect.style ('color', 'white');
+	changer.style ('color', 'white');
 
-	snap.style('border', 'none');
-	place.style('border', 'none');
-	solve.style('border', 'none');
-	areset.style('border', 'none');
-	elect.style('border', 'none');
+	snap.style ('border', 'none');
+	place.style ('border', 'none');
+	solve.style ('border', 'none');
+	areset.style ('border', 'none');
+	elect.style ('border', 'none');
+	changer.style ('border', 'none');
 
 	snap.style ('width', '710px');
 	place.style ('width', '710px');
 	solve.style ('width', '710px');
 	areset.style ('width', '710px');
 	elect.style ('width', '710px');
+	changer.style ('width', '710px');
 
 	snap.style ('height', '20px');
 	place.style ('height', '20px');
 	solve.style ('height', '20px');
 	areset.style ('height', '20px');
 	elect.style ('height', '20px');
+	changer.style ('height', '20px');
 
 	snap.style ('font-size', '16px');
 	place.style ('font-size', '16px');
 	solve.style ('font-size', '16px');
 	areset.style ('font-size', '16px');
 	elect.style ('font-size', '16px');
+	changer.style ('font-size', '16px');
 
 	snap.style ('background-color', '#000000');
 	place.style ('background-color', '#002000');
 	areset.style ('background-color', '#004000');
 	solve.style ('background-color', '#006000');
 	elect.style ('background-color', '#008000');
+	changer.style ('background-color', '#00a000');
 }
