@@ -228,6 +228,16 @@ function cset () {
 	solve.id ('solve');
 	areset.id ('areset');
 
+	coloring ();
+	
+	snap.mousePressed (photo);
+	place.mousePressed (placement);
+	solve.mousePressed (solver);
+	areset.mousePressed (mreset);
+}
+
+function coloring() {
+
 	snap.style ('color', 'white');
 	place.style ('color', 'white');
 	solve.style ('color', 'white');
@@ -257,9 +267,4 @@ function cset () {
 	place.style ('background-color', '#003000');
 	areset.style ('background-color', '#006000');
 	solve.style ('background-color', '#009000');
-
-	snap.mousePressed (photo);
-	place.mousePressed (placement);
-	solve.mousePressed (solver);
-	areset.mousePressed (mreset);
 }
