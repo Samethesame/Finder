@@ -1,5 +1,5 @@
 alert("file is running sketch");
-
+try {
 let video;
 let canvas;
 let radius = 5;
@@ -458,4 +458,8 @@ function coloring() {
 	solve.style ('background-color', '#006000');
 	elect.style ('background-color', '#008000');
 	changer.style ('background-color', '#00a000');
+}
+
+} catch (err) {
+	alert (err.message);
 }
