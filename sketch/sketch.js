@@ -1,3 +1,5 @@
+alert("file is running");
+
 let video;
 let canvas;
 let radius = 5;
