@@ -1,5 +1,3 @@
-alert("file is running dom");
-
 /*! p5.dom.js v0.3.2 March 25, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
