@@ -16,7 +16,6 @@ let aslider;
 let ncNode = -1;
 
 function setup () {
-	//createCapture (VIDEO);
 	video = createCapture (
 		{
 			audio: false,
