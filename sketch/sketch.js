@@ -16,7 +16,14 @@ let aslider;
 let ncNode = -1;
 
 function setup () {
-	video = createCapture (VIDEO);
+	//createCapture (VIDEO);
+	video = createCapture (
+		{
+			audio: false,
+			video: {facingMode: 'environment'}
+		}
+	);
+	
 	video.size (640, 480);
 	video.id ('video');
 	video.parent ("top");
