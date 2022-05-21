@@ -1,6 +1,5 @@
 let video;
 let canvas;
-let radius = 5;
 let list = [];
 let order = [];
 
@@ -13,6 +12,8 @@ let changer;
 let areset;
 let aslider;
 
+let radius = 5;
+let sRadius = 5;
 let ncNode = -1;
 
 function setup () {
@@ -51,8 +52,13 @@ function draw() {
 
 	radius = aslider.value ();
 
-	document.getElementById ('vtext').innerText = "node size: " + radius;
-
+	if (sRadius != radius) {
+		
+		document.getElementById ('vtext').innerText = "node size: " + radius;
+		
+		sRadius = radius;
+	}
+	
 	for (i = 0; i < list.length; i++) {
 	
 		ellipse (list[i].x, list[i].y, radius * 2, radius * 2);
@@ -200,11 +206,7 @@ function changeNode () {
 		
 		order[findB] = save;
 		
-		//if (findA < findB) {
-			
 		changeVM (findA, findB);
-
-		//}
 	}
 }
 
