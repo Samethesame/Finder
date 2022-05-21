@@ -1,5 +1,3 @@
-alert("file is running sound");
-
 /*! p5.sound.js v0.3.2 2016-11-01 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
