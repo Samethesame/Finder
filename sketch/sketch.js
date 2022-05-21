@@ -16,12 +16,10 @@ let aslider;
 let ncNode = -1;
 
 function setup () {
-	/*video = createCapture (VIDEO);
+	video = createCapture (VIDEO);
 	video.size (640, 480);
 	video.id ('video');
 	video.parent ("top");
-	*/
-	alert("file is running sketch");
 
 	canvas = createCanvas (640, 480);
 
