@@ -288,9 +288,10 @@ function finder () {
 	for (a = 0; a < list.length; a++) {
 
 		var hold = develop (a);
-
-		if (shortL > hold.distance) {
 			console.log(shortL + " " + hold.distance + " " + a);
+		if (shortL > hold.distance) {
+			console.log("thisone");
+			//console.log(shortL + " " + hold.distance + " " + a);
 			shortL = hold.distance;
 
 			finalList = cloneArray (hold.set);
