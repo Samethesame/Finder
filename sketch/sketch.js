@@ -288,6 +288,7 @@ function finder () {
 	for (a = 0; a < list.length; a++) {
 
 		var hold = develop (a);
+			console.log(a);
 			console.log(hold + " " + a);
 			console.log(list.length + " " + order.length);
 			console.log(shortL + " " + hold.distance + " " + a);
