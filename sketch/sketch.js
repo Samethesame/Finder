@@ -290,7 +290,7 @@ function finder () {
 		var hold = develop (a);
 
 		if (shortL > hold.distance) {
-			console.log(hold.distance + " " + a);
+			console.log(shortL + " " + hold.distance + " " + a);
 			shortL = hold.distance;
 
 			finalList = cloneArray (hold.set);
