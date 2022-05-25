@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Finder</title>
+		
+		<div>
+
+   	 		<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+
+   	 		<script language="javascript" type="text/javascript" src="sketch/sketch.js"></script>
+			<script language="javascript" type="text/javascript">
+
+			window.addEventListener ("DOMContentLoaded", function () {
+
+            			var errBack = function (e) {
+            		
+					console.log ('An error has occurred', e);
+            			};
+			
+			}, false);
+
+			</script>
+		</div>
+	</head>
+	<body>
+		<div align="center" id="top">
+			<!--video feed-->
+		</div>
+		<div align="center" id="holding">
+			<div align="center" id="baseA">
+				<!--captures the camera photo-->
+			</div>
+			<hr>
+			<div id="baseB"></div>
+			<p id="vtext">node size: 5</p>
+			<div id="baseC"></div>
+			<br>
+			<div id="space"></div>
+			<hr>
+			<div id="baseD"></div>
+			<hr>
+			<div id="aElect"></div>
+			<hr>
+		</div>
+		<div align="center" id="bottom">
+			<!--canvas-->
+		</div>
+		<div align="center">		
+			<div align="center" id="cSelect"></div>
+
+			<p id="rtext">see ahead: 3</p>
+
+			<div align="center" id="rS"></div>
+		
+			<p>Note: Changes with this value dramatically influence the result and runtime - going over three is not recommended.</p>
+			<p>The accuracy of the given result is proportional to this value.</p>
+			<p>To be perfect, a check of 'n' node need to be resolved (not going to happen when the time required is O (n!)).</p>
+			<p>Instead adjust the nodes presumably to the shortest path.</p>
+		</div>
+	</body>
+<html>
